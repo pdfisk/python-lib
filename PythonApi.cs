@@ -4,10 +4,6 @@ namespace PythonLib
 {
     public class PythonApi
     {
-        public string GetStudioVersion()
-        {
-            return "Studio API Version 1.0.0";
-        }
 
         public async Task<string> RunScript(string code)
         {
@@ -21,6 +17,12 @@ namespace PythonLib
             task.Wait();
             var result = task.Result;
             return result;
+        }
+
+        public void SetGlobal(string name, object value)
+        {
+            var engine = Engine.GetInstance();
+            engine.GetGlobalAccessor().SetGlobal(name, value);
         }
 
     }

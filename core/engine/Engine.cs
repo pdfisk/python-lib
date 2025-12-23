@@ -53,15 +53,20 @@ namespace Python.src.python.engine
             _engine.Runtime.IO.SetErrorOutput(_stderrStream, _stderrWriter);
         }
 
+        public GlobalAccessor GetGlobalAccessor()
+        {
+            return _globalAccessor;
+        }
+
         /// <summary>
         /// Loads a Python script into the current IronPython scope.
         /// </summary>
-        public void LoadScript(string filePath)
+        public void LoadScript(string fileName)
         {
-            if (!filePath.EndsWith(".py"))
-                filePath += ".py";
+            if (!fileName.EndsWith(".py"))
+                fileName += ".py";
             var scriptsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scripts");
-            var fullPath = Path.Combine(scriptsPath, filePath);
+            var fullPath = Path.Combine(scriptsPath, fileName);
             var exists = File.Exists(fullPath);
             PrintLn($"Loading script from: {fullPath} {exists}");
             if (File.Exists(fullPath))
