@@ -8,8 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="IronPython" Version="3.4.2" />
-    <PackageReference Include="IronPython.StdLib" Version="3.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="UtilLib">
+      <HintPath>..\..\cobol-studio-server\CobolStudioServer\dlib\UtilLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

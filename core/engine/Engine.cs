@@ -23,10 +23,6 @@ namespace Python.src.python.engine
             if (Instance == null)
             {
                 Instance = new Engine();
-                Instance._resultHandler = new ResultHandler();
-                //Instance.LoadScript("services");
-                //Instance.LoadScript("build");
-                //Instance.LoadScript("analyse");
             }
             return Instance;
         }
@@ -43,6 +39,7 @@ namespace Python.src.python.engine
             _engine = IronPython.Hosting.Python.CreateEngine();
             _scope = _engine.CreateScope();
             _globalAccessor = new GlobalAccessor(_engine, _scope);
+            _resultHandler = new ResultHandler();
             _sharedGlobalsDictionary = new Dictionary<string, object>();
             _stdoutStream = new MemoryStream();
             _stderrStream = new MemoryStream();
@@ -56,6 +53,16 @@ namespace Python.src.python.engine
         public GlobalAccessor GetGlobalAccessor()
         {
             return _globalAccessor;
+        }
+
+        public ICollection<string> GetSearchPaths()
+        {
+            return _engine.GetSearchPaths();
+        }
+
+        public void SetSearchPaths(ICollection<string> paths)
+        {
+            _engine.SetSearchPaths(paths);
         }
 
         /// <summary>
